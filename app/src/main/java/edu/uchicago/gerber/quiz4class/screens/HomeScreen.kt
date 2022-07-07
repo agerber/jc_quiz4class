@@ -31,7 +31,7 @@ import edu.uchicago.gerber.quiz4class.viewmodel.QuizViewModel
 fun HomeScreen(navController: NavController, viewModel: QuizViewModel) {
 
     val playerName = viewModel.playerName
-    val activity = (LocalContext.current as Activity)
+    val activity = (LocalContext.current as? Activity)
 
     Scaffold(topBar = {
         TopAppBar(
@@ -113,7 +113,7 @@ fun HomeScreen(navController: NavController, viewModel: QuizViewModel) {
                         }
                         Box(modifier = Modifier.height(24.dp))
                         Button(
-                            onClick = {activity.finish()},
+                            onClick = {activity?.finish()},
                             modifier = Modifier
                                 .weight(1f)
                                 .background(Color.Green)

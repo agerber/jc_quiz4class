@@ -2,7 +2,6 @@ package edu.uchicago.gerber.quiz4class.viewmodel
 
 
 import android.app.Application
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -14,16 +13,17 @@ import edu.uchicago.gerber.quiz4class.model.Constants.COUNTRY_INDEX
 import edu.uchicago.gerber.quiz4class.model.Constants.PIPE
 import edu.uchicago.gerber.quiz4class.model.Constants.REGION_INDEX
 import edu.uchicago.gerber.quiz4class.model.Question
+
 import kotlinx.coroutines.*
 import javax.inject.Inject
 import kotlin.random.Random
 
 @HiltViewModel
-class QuizViewModel @Inject constructor(val application: Application) : ViewModel() {
+//we inject a reference to the application object to gain access to the resources in strings.xml
+class QuizViewModel @Inject constructor(private val application: Application) : ViewModel() {
 
     //this value used on the HomeScreen
     private var _playerName = mutableStateOf("Adam")
-    //setting the value of a mutable state is easy, but to get it, you need to use state
     val playerName: State<String> = _playerName
 
 
@@ -40,28 +40,30 @@ class QuizViewModel @Inject constructor(val application: Application) : ViewMode
     val selectedOption: State<String> = _selectedOption
 
 
+    //these values used on the ResultScreen
+    private var _correctSubmissions = mutableStateOf<Int>(92);
+    val correctSubmissions: State<Int> = _correctSubmissions
+
+    private var _incorrectSubmissions = mutableStateOf<Int>(8);
+    val incorrectSubmissions: State<Int> = _incorrectSubmissions
+
+
 
     init {
         //clear out the default values above which are used in Preview mode
-       // reset()
+        reset()
         clearSelectedOption()
         getQuestion()
     }
-
-
-
 
 
     //////////////////////////////////
     //methods for HomeScreen
     //////////////////////////////////
     fun setPlayerName(name: String) {
-            _playerName.value = name
+        _playerName.value = name
 
     }
-
-
-
 
     //////////////////////////////////
     //methods for QuestionScreen
@@ -126,11 +128,9 @@ class QuizViewModel @Inject constructor(val application: Application) : ViewMode
 
         //if the user selected the correct answer
         if (question.capital == selectedOption.value) {
-            Log.d("ANSWER" ,"correct")
-           // incrementCorrect()
+            incrementCorrect()
         } else {
-            Log.d("ANSWER" ,"incorrect")
-            //incrementIncorrect()
+            incrementIncorrect()
         }
         //queue up another valid question
         getQuestion()
@@ -147,10 +147,30 @@ class QuizViewModel @Inject constructor(val application: Application) : ViewMode
         _selectedOption.value = ""
     }
 
+    //////////////////////////////////
+    //methods for ResultScreen
+    //////////////////////////////////
+    fun anotherQuiz() {
+        _correctSubmissions.value = 0
+        _incorrectSubmissions.value = 0
+        _questionNumber.value = 1
+    }
 
+    fun reset() {
+        anotherQuiz()
+        _playerName.value = ""
+    }
 
+    private fun incrementCorrect() {
+        val correctSubmitted = correctSubmissions.value + 1
+        _correctSubmissions.value = correctSubmitted
+    }
 
-
+    private fun incrementIncorrect() {
+        val incorrectSubmitted = incorrectSubmissions.value + 1
+        _incorrectSubmissions.value = incorrectSubmitted
+    }
 
 }
+
 
