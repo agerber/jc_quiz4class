@@ -2,6 +2,10 @@ package edu.uchicago.gerber.quiz4class.screens
 
 
 
+import android.app.Activity
+import android.app.Application
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
@@ -10,18 +14,21 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import edu.uchicago.gerber.quiz4class.ui.theme.RedColor
+import edu.uchicago.gerber.quiz4class.viewmodel.QuizViewModel
 
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(viewModel: QuizViewModel) {
 
-    val playerName = "Adam"
+    val playerName = viewModel.playerName
+    val activity = (LocalContext.current as? Activity)
 
     Scaffold(topBar = {
         TopAppBar(
@@ -57,7 +64,7 @@ fun HomeScreen() {
                         style = MaterialTheme.typography.body1
                     )
                     OutlinedTextField(
-                        value = playerName,
+                        value = playerName.value,
                         onValueChange ={},
                         modifier = Modifier
                             .background(Color.Transparent)
@@ -81,7 +88,13 @@ fun HomeScreen() {
                 ) {
                     Column(modifier = Modifier.fillMaxWidth()) {
                         Button(
-                            onClick = {},
+                            onClick = {
+                                if (playerName.value.isNotBlank()) {
+                                    viewModel.setPlayerName(playerName.value)
+                                }
+
+                                Toast.makeText(activity, viewModel.playerName.value, Toast.LENGTH_LONG).show()
+                            },
                             modifier = Modifier
                                 .weight(2f)
                                 .fillMaxWidth()
@@ -118,6 +131,6 @@ fun HomeScreen() {
 
 @Preview(showBackground = true)
 @Composable
-fun HomeScreenPreview() {
-    HomeScreen()
+fun HomeScreenPreview(quizViewModel: QuizViewModel = QuizViewModel(Application())) {
+    HomeScreen(viewModel = quizViewModel)
 }

@@ -13,7 +13,7 @@ import javax.inject.Inject
 import kotlin.random.Random
 
 @HiltViewModel
-class QuizViewModel  : ViewModel() {
+class QuizViewModel @Inject constructor(val application: Application) : ViewModel() {
 
     //this value used on the HomeScreen
     private var _playerName = mutableStateOf("Adam")
