@@ -19,7 +19,7 @@ class Question(
         if (allAnswers.size == 0){
             allAnswers.add(answer)
         } else {
-            val insertAt = random.nextInt(allAnswers.size) + 1
+            val insertAt = random.nextInt(allAnswers.size + 1)
             allAnswers.add(insertAt, answer )
         }
     }
