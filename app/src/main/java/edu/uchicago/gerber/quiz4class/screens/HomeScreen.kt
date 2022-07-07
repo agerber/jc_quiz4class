@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import edu.uchicago.gerber.quiz.navigation.Screen
 import edu.uchicago.gerber.quiz4class.ui.theme.RedColor
 import edu.uchicago.gerber.quiz4class.viewmodel.QuizViewModel
 
@@ -92,11 +93,12 @@ fun HomeScreen(navController: NavController, viewModel: QuizViewModel) {
                     Column(modifier = Modifier.fillMaxWidth()) {
                         Button(
                             onClick = {
+
                                 if (playerName.value.isNotBlank()) {
                                     viewModel.setPlayerName(playerName.value)
                                 }
-
-                                Toast.makeText(activity, viewModel.playerName.value, Toast.LENGTH_LONG).show()
+                                navController.navigate(Screen.QuestionScreen.route)
+                                //Toast.makeText(activity, viewModel.playerName.value, Toast.LENGTH_LONG).show()
                             },
                             modifier = Modifier
                                 .weight(2f)
@@ -111,7 +113,7 @@ fun HomeScreen(navController: NavController, viewModel: QuizViewModel) {
                         }
                         Box(modifier = Modifier.height(24.dp))
                         Button(
-                            onClick = {},
+                            onClick = {activity.finish()},
                             modifier = Modifier
                                 .weight(1f)
                                 .background(Color.Green)

@@ -4,19 +4,27 @@ import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.Stats.Football.presentation.navigation.NavigationGraph
+import dagger.hilt.android.AndroidEntryPoint
 import edu.uchicago.gerber.quiz4class.screens.HomeScreen
 import edu.uchicago.gerber.quiz4class.viewmodel.QuizViewModel
 
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
 
-              HomeScreen(viewModel = QuizViewModel(Application()))
+            Surface(color = MaterialTheme.colors.background) {
+                val navController = rememberNavController()
+                NavigationGraph(navController = navController)
+            }
         }
     }
 }
@@ -26,5 +34,6 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    HomeScreen(viewModel = QuizViewModel(Application()))
+   // see screens
+
 }
