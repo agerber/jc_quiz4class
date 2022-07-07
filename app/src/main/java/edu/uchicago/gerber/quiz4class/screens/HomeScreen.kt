@@ -28,7 +28,7 @@ import edu.uchicago.gerber.quiz4class.viewmodel.QuizViewModel
 fun HomeScreen(viewModel: QuizViewModel) {
 
     val playerName = viewModel.playerName
-    val activity = (LocalContext.current as? Activity)
+    val activity = (LocalContext.current as Activity)
 
     Scaffold(topBar = {
         TopAppBar(
@@ -65,7 +65,8 @@ fun HomeScreen(viewModel: QuizViewModel) {
                     )
                     OutlinedTextField(
                         value = playerName.value,
-                        onValueChange ={},
+                        onValueChange =
+                        viewModel::setPlayerName,
                         modifier = Modifier
                             .background(Color.Transparent)
                             .fillMaxWidth(),
