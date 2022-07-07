@@ -1,6 +1,7 @@
 package edu.uchicago.gerber.quiz4class.screens
 
 
+import android.app.Application
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.*
@@ -11,12 +12,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import edu.uchicago.gerber.quiz4class.model.Question
 import edu.uchicago.gerber.quiz4class.ui.theme.RedColor
+import edu.uchicago.gerber.quiz4class.viewmodel.QuizViewModel
 
 
 @Composable
-fun QuestionScreen() {
+fun QuestionScreen(navController: NavController, viewModel: QuizViewModel) {
 
     val question = Question("Poland", "Warsaw", "EUR")
     question.addAnswer("London")
@@ -143,6 +147,6 @@ fun QuestionScreen() {
 
 @Preview(showBackground = true)
 @Composable
-fun QuestionScreenPreview() {
-    QuestionScreen()
+fun QuestionScreenPreview(quizViewModel: QuizViewModel = QuizViewModel(Application())) {
+    QuestionScreen(navController = rememberNavController(), viewModel = quizViewModel)
 }

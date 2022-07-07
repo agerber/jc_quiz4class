@@ -20,12 +20,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import edu.uchicago.gerber.quiz4class.ui.theme.RedColor
 import edu.uchicago.gerber.quiz4class.viewmodel.QuizViewModel
 
 
 @Composable
-fun HomeScreen(viewModel: QuizViewModel) {
+fun HomeScreen(navController: NavController, viewModel: QuizViewModel) {
 
     val playerName = viewModel.playerName
     val activity = (LocalContext.current as Activity)
@@ -133,5 +135,5 @@ fun HomeScreen(viewModel: QuizViewModel) {
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview(quizViewModel: QuizViewModel = QuizViewModel(Application())) {
-    HomeScreen(viewModel = quizViewModel)
+    HomeScreen(navController = rememberNavController(), viewModel = quizViewModel)
 }

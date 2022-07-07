@@ -12,11 +12,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import edu.uchicago.gerber.quiz4class.ui.theme.RedColor
+import edu.uchicago.gerber.quiz4class.viewmodel.QuizViewModel
 
 
 @Composable
-fun ResultScreen() {
+fun ResultScreen(navController: NavController, viewModel: QuizViewModel) {
     val correctSubmissions = 46
     val incorrectSubmissions = 5
     val scorePercent = 92.19898989898
@@ -163,6 +166,6 @@ fun ResultScreen() {
 
 @Preview(showBackground = true)
 @Composable
-fun ResultScreenPreview() {
-    ResultScreen()
+fun ResultScreenPreview(quizViewModel: QuizViewModel = QuizViewModel(Application())) {
+    ResultScreen(navController = rememberNavController(), viewModel = quizViewModel)
 }
