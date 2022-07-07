@@ -21,6 +21,8 @@ import edu.uchicago.gerber.quiz4class.ui.theme.RedColor
 @Composable
 fun HomeScreen() {
 
+    val playerName = "Adam"
+
     Scaffold(topBar = {
         TopAppBar(
             title = {
@@ -55,7 +57,7 @@ fun HomeScreen() {
                         style = MaterialTheme.typography.body1
                     )
                     OutlinedTextField(
-                        value = "Adam",
+                        value = playerName,
                         onValueChange ={},
                         modifier = Modifier
                             .background(Color.Transparent)

@@ -20,6 +20,8 @@ fun QuestionScreen() {
 
     val selectedOption = "Warsaw"
     val answers = listOf("London", "Berlin", "Prague", "Warsaw", "Madrid")
+    val questionNumber = 5
+
 
 
     Scaffold(topBar = {
@@ -45,7 +47,7 @@ fun QuestionScreen() {
                         .weight(7f)
                 ) {
                     Text(
-                        text = "Question 1 :",
+                        text = "Question $questionNumber :",
                         modifier = Modifier.padding(horizontal = 16.dp, vertical = 24.dp),
                         style = MaterialTheme.typography.subtitle2
                     )
