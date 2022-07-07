@@ -14,16 +14,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import edu.uchicago.gerber.quiz.navigation.Screen
 import edu.uchicago.gerber.quiz4class.ui.theme.RedColor
 import edu.uchicago.gerber.quiz4class.viewmodel.QuizViewModel
 
 
 @Composable
 fun ResultScreen(navController: NavController, viewModel: QuizViewModel) {
-    val correctSubmissions = 46
-    val incorrectSubmissions = 5
-    val scorePercent = 92.19898989898
-    val playerName = "Adam"
+
+    val correctSubmissions = viewModel.correctSubmissions.value
+    val incorrectSubmissions = viewModel.incorrectSubmissions.value
+    val scorePercent = 100 * (correctSubmissions.toDouble() /  (correctSubmissions + incorrectSubmissions))
+    val playerName = viewModel.playerName.value
 
     Scaffold(topBar = {
         TopAppBar(
@@ -127,7 +129,10 @@ fun ResultScreen(navController: NavController, viewModel: QuizViewModel) {
                 ) {
                     Button(
                         onClick = {
-
+                            viewModel.anotherQuiz()
+                            viewModel.getQuestion()
+                            navController.popBackStack(Screen.ResultScreen.route, true)
+                            navController.navigate(Screen.QuestionScreen.route)
                         },
                         modifier = Modifier
                             .weight(3f)
@@ -142,7 +147,9 @@ fun ResultScreen(navController: NavController, viewModel: QuizViewModel) {
                     Box(modifier = Modifier.width(8.dp))
                     Button(
                         onClick = {
-
+                            viewModel.reset()
+                            navController.popBackStack(Screen.ResultScreen.route, true)
+                            navController.popBackStack(Screen.QuestionScreen.route, true)
                         },
                         modifier = Modifier
                             .weight(2f)
