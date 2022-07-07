@@ -60,12 +60,12 @@ fun QuestionScreen(navController: NavController, viewModel: QuizViewModel) {
                     Divider()
                     Text(
                         text = question.questionText,
-                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 24.dp),
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 12.dp),
                         style = MaterialTheme.typography.h6
                     )
                     answers.forEach { option ->
                         Box(modifier = Modifier
-                            .padding(10.dp)
+                            .padding(2.dp)
                             .selectable(
                                 selected = (option == selectedOption),
                                 onClick = { viewModel.selectOption(option = option) }
@@ -82,7 +82,7 @@ fun QuestionScreen(navController: NavController, viewModel: QuizViewModel) {
                                 Text(
                                     text = option,
                                     modifier = Modifier
-                                        .padding(horizontal = 8.dp),
+                                        .padding(top = 12.dp),
 
                                     style = MaterialTheme.typography.subtitle1
                                 )
