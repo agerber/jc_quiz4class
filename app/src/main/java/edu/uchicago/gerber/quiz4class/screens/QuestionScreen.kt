@@ -22,16 +22,10 @@ import edu.uchicago.gerber.quiz4class.viewmodel.QuizViewModel
 @Composable
 fun QuestionScreen(navController: NavController, viewModel: QuizViewModel) {
 
-    val question = Question("Poland", "Warsaw", "EUR")
-    question.addAnswer("London")
-    question.addAnswer("Berlin")
-    question.addAnswer("Prague")
-    question.addAnswer("Warsaw")
-    question.addAnswer("Madrid")
-
-    val selectedOption = "Berlin"
-    val answers = question.allAnswers
-    val questionNumber = 5
+    val selectedOption: String = viewModel.selectedOption.value
+    val question: Question = viewModel.question.value
+    val questionNumber: Int = viewModel.questionNumber.value
+    val answers: List<String> = viewModel.question.value.allAnswers
 
 
 
