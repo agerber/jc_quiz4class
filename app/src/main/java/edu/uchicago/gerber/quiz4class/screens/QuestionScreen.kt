@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import edu.uchicago.gerber.quiz.navigation.Screen
 import edu.uchicago.gerber.quiz4class.model.Question
 import edu.uchicago.gerber.quiz4class.ui.theme.RedColor
 import edu.uchicago.gerber.quiz4class.viewmodel.QuizViewModel
@@ -67,7 +68,7 @@ fun QuestionScreen(navController: NavController, viewModel: QuizViewModel) {
                             .padding(10.dp)
                             .selectable(
                                 selected = (option == selectedOption),
-                                onClick = { }
+                                onClick = { viewModel.selectOption(option = option) }
                             )) {
                             Row(
                                 modifier = Modifier
@@ -76,7 +77,7 @@ fun QuestionScreen(navController: NavController, viewModel: QuizViewModel) {
 
                             ) {
                                 RadioButton(selected = selectedOption == option, onClick = {
-
+                                    viewModel.selectOption(option = option)
                                 })
                                 Text(
                                     text = option,
@@ -98,12 +99,12 @@ fun QuestionScreen(navController: NavController, viewModel: QuizViewModel) {
                 ) {
                     Button(
                         onClick = {
-
+                            viewModel.submitAnswer(question = question)
                         },
                         modifier = Modifier
                             .weight(3f)
                             .fillMaxHeight(),
-                        enabled = true
+                        enabled = selectedOption.isNotBlank()
                     ) {
                         Text(
                             text = "Submit", style = MaterialTheme.typography.button.copy(
@@ -114,7 +115,8 @@ fun QuestionScreen(navController: NavController, viewModel: QuizViewModel) {
                     Box(modifier = Modifier.width(8.dp))
                     Button(
                         onClick = {
-
+                            navController.popBackStack(Screen.QuestionScreen.route, true)
+                            navController.navigate(Screen.ResultScreen.route)
                         },
                         modifier = Modifier
                             .weight(2f)

@@ -2,6 +2,7 @@ package edu.uchicago.gerber.quiz4class.viewmodel
 
 
 import android.app.Application
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -125,8 +126,10 @@ class QuizViewModel @Inject constructor(val application: Application) : ViewMode
 
         //if the user selected the correct answer
         if (question.capital == selectedOption.value) {
+            Log.d("ANSWER" ,"correct")
            // incrementCorrect()
         } else {
+            Log.d("ANSWER" ,"incorrect")
             //incrementIncorrect()
         }
         //queue up another valid question
