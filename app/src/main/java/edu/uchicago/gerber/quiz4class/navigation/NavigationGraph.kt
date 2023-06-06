@@ -13,8 +13,10 @@ import edu.uchicago.gerber.quiz4class.screens.ResultScreen
 import edu.uchicago.gerber.quiz4class.viewmodel.QuizViewModel
 
 @Composable
-fun NavigationGraph(navController: NavHostController) {
-    val viewModel: QuizViewModel = viewModel()
+fun NavigationGraph(
+    navController: NavHostController,
+    viewModel: QuizViewModel = viewModel()
+) {
     NavHost(
         navController = navController,
         startDestination = Screen.HomeScreen.route

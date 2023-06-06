@@ -3,9 +3,6 @@ package edu.uchicago.gerber.quiz4class.screens
 
 
 import android.app.Activity
-import android.app.Application
-import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
@@ -136,6 +133,6 @@ fun HomeScreen(navController: NavController, viewModel: QuizViewModel) {
 
 @Preview(showBackground = true)
 @Composable
-fun HomeScreenPreview(quizViewModel: QuizViewModel = QuizViewModel(Application())) {
+fun HomeScreenPreview(quizViewModel: QuizViewModel = QuizViewModel()) {
     HomeScreen(navController = rememberNavController(), viewModel = quizViewModel)
 }

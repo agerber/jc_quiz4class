@@ -1,7 +1,6 @@
 package edu.uchicago.gerber.quiz4class.screens
 
 
-import android.app.Application
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -173,6 +172,6 @@ fun ResultScreen(navController: NavController, viewModel: QuizViewModel) {
 
 @Preview(showBackground = true)
 @Composable
-fun ResultScreenPreview(quizViewModel: QuizViewModel = QuizViewModel(Application())) {
+fun ResultScreenPreview(quizViewModel: QuizViewModel = QuizViewModel()) {
     ResultScreen(navController = rememberNavController(), viewModel = quizViewModel)
 }

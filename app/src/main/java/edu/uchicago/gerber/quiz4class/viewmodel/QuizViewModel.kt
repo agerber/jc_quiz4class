@@ -1,12 +1,11 @@
 package edu.uchicago.gerber.quiz4class.viewmodel
 
 
-import android.app.Application
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
+import edu.uchicago.gerber.quiz4class.CapitalsApplication
 import edu.uchicago.gerber.quiz4class.R
 import edu.uchicago.gerber.quiz4class.model.Constants.CAPITAL_INDEX
 import edu.uchicago.gerber.quiz4class.model.Constants.COUNTRY_INDEX
@@ -15,12 +14,10 @@ import edu.uchicago.gerber.quiz4class.model.Constants.REGION_INDEX
 import edu.uchicago.gerber.quiz4class.model.Question
 
 import kotlinx.coroutines.*
-import javax.inject.Inject
 import kotlin.random.Random
 
-@HiltViewModel
 //we inject a reference to the application object to gain access to the resources in strings.xml
-class QuizViewModel @Inject constructor(private val application: Application) : ViewModel() {
+class QuizViewModel: ViewModel() {
 
     //this value used on the HomeScreen
     private var _playerName = mutableStateOf("Adam")
@@ -30,21 +27,21 @@ class QuizViewModel @Inject constructor(private val application: Application) : 
     //these values used on the QuestionScreen
     //the following is used for preview-only
     private var previewAnswers = mutableListOf("Paris", "Berlin", "London", "Dublin", "Lisbon")
-    private var _question = mutableStateOf<Question>(Question("Germany", "Berlin", "EUR", previewAnswers))
+    private var _question = mutableStateOf(Question("Germany", "Berlin", "EUR", previewAnswers))
     val question: State<Question> = _question
 
-    private var _questionNumber = mutableStateOf<Int>(1)
+    private var _questionNumber = mutableStateOf(1)
     val questionNumber: State<Int> = _questionNumber
 
-    private var _selectedOption = mutableStateOf<String>("Berlin")
+    private var _selectedOption = mutableStateOf("Berlin")
     val selectedOption: State<String> = _selectedOption
 
 
     //these values used on the ResultScreen
-    private var _correctSubmissions = mutableStateOf<Int>(92);
+    private var _correctSubmissions = mutableStateOf(92)
     val correctSubmissions: State<Int> = _correctSubmissions
 
-    private var _incorrectSubmissions = mutableStateOf<Int>(8);
+    private var _incorrectSubmissions = mutableStateOf(8)
     val incorrectSubmissions: State<Int> = _incorrectSubmissions
 
 
@@ -74,7 +71,7 @@ class QuizViewModel @Inject constructor(private val application: Application) : 
 
         //arrayDeferred is the future value returned by .async
         val arrayDeferred = CoroutineScope(Dispatchers.IO).async {
-            application.resources.getStringArray(R.array.countries_capitals)
+            CapitalsApplication.app.resources.getStringArray(R.array.countries_capitals)
         }
         //calling .await() forces execution to wait until the value gets returned
         val array = arrayDeferred.await()

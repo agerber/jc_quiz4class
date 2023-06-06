@@ -1,7 +1,6 @@
 package edu.uchicago.gerber.quiz4class.screens
 
 
-import android.app.Application
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.*
@@ -143,6 +142,6 @@ fun QuestionScreen(navController: NavController, viewModel: QuizViewModel) {
 
 @Preview(showBackground = true)
 @Composable
-fun QuestionScreenPreview(quizViewModel: QuizViewModel = QuizViewModel(Application())) {
+fun QuestionScreenPreview(quizViewModel: QuizViewModel = QuizViewModel()) {
     QuestionScreen(navController = rememberNavController(), viewModel = quizViewModel)
 }
